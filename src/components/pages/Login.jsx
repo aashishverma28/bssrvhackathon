@@ -49,8 +49,9 @@ export default function Login({ onNavigate }) {
         {/* Left Side: Brand & Value Prop */}
         <div className="w-full md:w-1/2 bg-dark p-12 flex flex-col justify-between">
           <div>
-            <div className="font-heading font-bold text-white text-2xl tracking-tight mb-8">
-              Roommate<span className="text-accent">Harmony</span>
+            <div className="font-heading font-bold text-white text-2xl tracking-tight mb-8 flex items-center gap-3">
+              <img src="/logo.png" alt="Logo" className="h-10 w-auto" />
+              <span>Roommate<span className="text-accent">Harmony</span></span>
             </div>
             <h2 className="text-headline font-heading font-bold text-warm-white leading-tight">
               Welcome back to your shared space.

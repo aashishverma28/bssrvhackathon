@@ -55,8 +55,9 @@ export default function SignUp({ onNavigate }) {
         {/* Value Prop */}
         <div className="w-full md:w-1/2 bg-accent text-warm-white p-12 flex flex-col justify-between">
           <div>
-            <div className="font-heading font-bold text-white text-2xl tracking-tight mb-8">
-              Roommate<span className="text-dark">Harmony</span>
+            <div className="font-heading font-bold text-white text-2xl tracking-tight mb-8 flex items-center gap-3">
+              <img src="/logo.png" alt="Logo" className="h-10 w-auto" />
+              <span>Roommate<span className="text-dark">Harmony</span></span>
             </div>
             <h2 className="text-headline font-heading font-bold leading-tight">
               Start building a better home today.

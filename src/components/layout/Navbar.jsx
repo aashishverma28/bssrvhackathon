@@ -4,8 +4,9 @@ export default function Navbar({ onNavigate }) {
   return (
     <nav className="fixed top-0 w-full bg-warm-white/90 backdrop-blur-md z-50 border-b border-border-soft">
       <div className="container-max px-6 h-20 flex items-center justify-between">
-        <div className="font-heading font-bold text-dark text-xl tracking-tight">
-          Roommate<span className="text-accent">Harmony</span>
+        <div className="font-heading font-bold text-dark text-xl tracking-tight flex items-center gap-3">
+          <img src="/logo.png" alt="Logo" className="h-8 w-auto" />
+          <span>Roommate<span className="text-accent">Harmony</span></span>
         </div>
         <div className="hidden md:flex items-center gap-8 text-small font-medium text-dark-soft">
           <a href="#problem" className="hover:text-accent transition-colors">The Reality</a>

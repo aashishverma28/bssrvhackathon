@@ -26,10 +26,11 @@ export default function Layout({ children, activeTab, onNavigate, onSignOut, hou
         <div>
           {/* Logo */}
           <div
-            className="font-heading font-bold text-xl tracking-tight mb-12 cursor-pointer"
+            className="font-heading font-bold text-xl tracking-tight mb-12 cursor-pointer flex items-center gap-3"
             onClick={() => onNavigate('dashboard')}
           >
-            Roommate<span className="text-accent">Harmony</span>
+            <img src="/logo.png" alt="Logo" className="h-8 w-auto" />
+            <span>Roommate<span className="text-accent">Harmony</span></span>
           </div>
 
           {/* Nav Items */}
