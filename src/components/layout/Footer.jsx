@@ -13,7 +13,7 @@ export default function Footer() {
           <a href="#" className="hover:text-white transition-colors">Contact</a>
         </div>
         <div className="text-small text-muted">
-          &copy; {new Date().getFullYear()} Hackathon Project
+          &copy; {new Date().getFullYear()} Made By Team Rhino Runtime
         </div>
       </div>
     </footer>
