@@ -36,8 +36,8 @@ export default function DemoData() {
               />
             ))}
             <p className="text-small text-muted mt-6">
-              Shared expenses logged: ${household.expenses.total} total —
-              Outstanding imbalance: ${household.expenses.imbalance} ({household.expenses.imbalanceMember})
+              Shared expenses logged: ₹{household.expenses.total} total —
+              Outstanding imbalance: ₹{household.expenses.imbalance} ({household.expenses.imbalanceMember})
             </p>
           </div>
 

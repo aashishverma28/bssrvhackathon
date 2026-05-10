@@ -210,7 +210,7 @@ export default function Dashboard({ onNavigate, onSignOut, user }) {
                           onClick={() => handleLogExpense(m.name, 10)}
                           className="px-3 py-1 bg-accent-amber text-white rounded-full text-[10px] hover:opacity-80 transition-opacity"
                         >
-                          + $10 {m.name}
+                          + ₹10 {m.name}
                         </button>
                       </div>
                     ))}
@@ -225,7 +225,7 @@ export default function Dashboard({ onNavigate, onSignOut, user }) {
                 {logs.slice(0, 3).map(log => (
                   <div key={log.id} className="text-xs border-l-2 border-accent pl-3">
                     <span className="font-bold text-accent">{log.member_name}</span> 
-                    {log.type === 'chore' ? ' completed a chore' : ` spent $${log.amount}`}
+                    {log.type === 'chore' ? ' completed a chore' : ` spent ₹${log.amount}`}
                   </div>
                 ))}
                 {logs.length === 0 && <p className="text-xs text-muted">No recent activity.</p>}

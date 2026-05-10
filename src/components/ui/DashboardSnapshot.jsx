@@ -32,7 +32,7 @@ export default function DashboardSnapshot({ detailed = false }) {
           </div>
           <div className="bg-off-white p-3 rounded-soft border border-border-soft text-small flex justify-between items-center">
             <span className="text-dark-soft">Alex owes</span>
-            <span className="font-mono font-bold text-dark">$48.50</span>
+            <span className="font-mono font-bold text-dark">₹48.50</span>
           </div>
         </div>
 

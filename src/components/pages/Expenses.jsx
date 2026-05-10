@@ -252,7 +252,7 @@ export default function Expenses({ onNavigate, onSignOut }) {
                 {form.split_between.length > 0 && form.amount && (
                   <p className="text-xs text-muted mt-2">
                     Each person pays: <span className="font-bold text-dark">
-                      LKR {(parseFloat(form.amount || 0) / form.split_between.length).toFixed(2)}
+                      ₹ {(parseFloat(form.amount || 0) / form.split_between.length).toFixed(2)}
                     </span>
                   </p>
                 )}
@@ -276,13 +276,13 @@ export default function Expenses({ onNavigate, onSignOut }) {
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8">
         <div className="bg-dark text-warm-white p-6 rounded-card shadow-card">
           <p className="text-xs uppercase tracking-widest text-muted mb-2">Total Spent</p>
-          <p className="text-3xl font-heading font-bold">LKR {totalSpent.toLocaleString()}</p>
+          <p className="text-3xl font-heading font-bold">₹ {totalSpent.toLocaleString()}</p>
           <p className="text-xs text-muted mt-1">{expenses.length} transactions</p>
         </div>
         <div className="bg-white p-6 rounded-card shadow-card border border-border-soft">
           <p className="text-xs uppercase tracking-widest text-muted mb-2">Per Person (avg)</p>
           <p className="text-3xl font-heading font-bold text-dark">
-            LKR {members.length ? (totalSpent / members.length).toFixed(0) : 0}
+            ₹ {members.length ? (totalSpent / members.length).toFixed(0) : 0}
           </p>
           <p className="text-xs text-muted mt-1">fair share each</p>
         </div>
@@ -312,7 +312,7 @@ export default function Expenses({ onNavigate, onSignOut }) {
               >
                 {cat !== 'All' && CATEGORY_ICONS[cat]} {cat}
                 {cat !== 'All' && byCategory[cat] && (
-                  <span className="ml-1 opacity-70">· LKR {byCategory[cat].toLocaleString()}</span>
+                  <span className="ml-1 opacity-70">· ₹ {byCategory[cat].toLocaleString()}</span>
                 )}
               </button>
             ))}
@@ -348,7 +348,7 @@ export default function Expenses({ onNavigate, onSignOut }) {
                       <p className="text-xs text-muted mt-1">
                         Paid by <span className="font-semibold text-dark">{exp.paid_by}</span>
                         {exp.split_between?.length > 0 && (
-                          <span> · Split {splitCount} ways (LKR {share.toFixed(0)} each)</span>
+                          <span> · Split {splitCount} ways (₹ {share.toFixed(0)} each)</span>
                         )}
                       </p>
                       <p className="text-[10px] text-muted mt-0.5">
@@ -358,7 +358,7 @@ export default function Expenses({ onNavigate, onSignOut }) {
 
                     {/* Amount */}
                     <div className="text-right flex-shrink-0">
-                      <p className="font-heading font-bold text-dark text-lg">LKR {Number(exp.amount).toLocaleString()}</p>
+                      <p className="font-heading font-bold text-dark text-lg">₹ {Number(exp.amount).toLocaleString()}</p>
                       <button
                         onClick={() => handleDeleteExpense(exp.id)}
                         className="text-[10px] text-muted hover:text-red-500 transition-colors opacity-0 group-hover:opacity-100 mt-1"
@@ -390,7 +390,7 @@ export default function Expenses({ onNavigate, onSignOut }) {
                     <div className="flex justify-between items-center mb-1.5">
                       <span className="text-sm font-semibold text-dark">{name}</span>
                       <span className={`text-sm font-bold ${bal > 0 ? 'text-green-600' : bal < 0 ? 'text-red-500' : 'text-muted'}`}>
-                        {bal > 0 ? `+LKR ${bal.toFixed(0)}` : bal < 0 ? `-LKR ${Math.abs(bal).toFixed(0)}` : 'Settled ✓'}
+                        {bal > 0 ? `+₹ ${bal.toFixed(0)}` : bal < 0 ? `-₹ ${Math.abs(bal).toFixed(0)}` : 'Settled ✓'}
                       </span>
                     </div>
                     <div className="h-1.5 bg-off-white rounded-full overflow-hidden">
@@ -423,7 +423,7 @@ export default function Expenses({ onNavigate, onSignOut }) {
                       <div key={cat}>
                         <div className="flex justify-between text-xs mb-1.5">
                           <span>{CATEGORY_ICONS[cat]} {cat}</span>
-                          <span className="font-bold">LKR {amt.toLocaleString()} <span className="text-muted font-normal">({pct.toFixed(0)}%)</span></span>
+                          <span className="font-bold">₹ {amt.toLocaleString()} <span className="text-muted font-normal">({pct.toFixed(0)}%)</span></span>
                         </div>
                         <div className="h-1.5 bg-white/10 rounded-full">
                           <div

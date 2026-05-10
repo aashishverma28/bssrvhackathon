@@ -34,7 +34,7 @@ export default function MediationChat({ onNavigate }) {
       if (input.toLowerCase().includes('chore')) {
         aiResponse += "It looks like chores have been unbalanced lately. I suggest Alex takes over the dishes for the next 2 days to even things out."
       } else if (input.toLowerCase().includes('money') || input.toLowerCase().includes('expense')) {
-        aiResponse += "Financial transparency is key. I see a $20 imbalance. Perhaps we can set a weekly reminder to settle up every Sunday?"
+        aiResponse += "Financial transparency is key. I see a ₹20 imbalance. Perhaps we can set a weekly reminder to settle up every Sunday?"
       } else {
         aiResponse += "Communication is the first step! I recommend scheduling a 10-minute check-in this evening to discuss everyone's expectations."
       }
