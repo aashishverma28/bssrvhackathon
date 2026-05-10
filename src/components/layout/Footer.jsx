@@ -11,8 +11,9 @@ export default function Footer() {
         <div className="text-small text-muted flex gap-6 text-center">
           <span className="text-white font-medium">Made By Aashish Verma & Jimani Bharadwaj</span>
         </div>
-        <div className="text-small text-muted">
-          &copy; {new Date().getFullYear()} Made By Team Rhino Runtime
+        <div className="text-small text-muted flex items-center gap-2">
+          <span>&copy; {new Date().getFullYear()} Made By Team Rhino Runtime</span>
+          <img src="/team-logo.png" alt="Team Rhino Runtime Logo" className="h-6 w-auto" />
         </div>
       </div>
     </footer>
