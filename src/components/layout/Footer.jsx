@@ -13,7 +13,7 @@ export default function Footer() {
         </div>
         <div className="text-small text-muted flex items-center gap-2">
           <span>&copy; {new Date().getFullYear()} Made By Team Rhino Runtime</span>
-          <img src="/team-logo.png" alt="Team Rhino Runtime Logo" className="h-6 w-auto" />
+          <img src="/team-logo.png" alt="Team Rhino Runtime Logo" className="h-10 w-auto" />
         </div>
       </div>
     </footer>
