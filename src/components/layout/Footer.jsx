@@ -1,0 +1,21 @@
+import React from 'react'
+
+export default function Footer() {
+  return (
+    <footer className="bg-dark text-warm-white py-12 px-6">
+      <div className="container-max flex flex-col md:flex-row justify-between items-center gap-6">
+        <div className="font-heading font-bold text-xl tracking-tight text-white">
+          Roommate<span className="text-accent">Harmony</span>
+        </div>
+        <div className="text-small text-muted flex gap-6">
+          <a href="#" className="hover:text-white transition-colors">Privacy</a>
+          <a href="#" className="hover:text-white transition-colors">Terms</a>
+          <a href="#" className="hover:text-white transition-colors">Contact</a>
+        </div>
+        <div className="text-small text-muted">
+          &copy; {new Date().getFullYear()} Hackathon Project
+        </div>
+      </div>
+    </footer>
+  )
+}
