@@ -24,12 +24,7 @@ export default function Navbar({ onNavigate }) {
           >
             Sign Up
           </button>
-          <button 
-            className="bg-dark text-warm-white px-5 py-2 rounded-soft hover:bg-dark-soft transition-colors ml-4"
-            onClick={() => document.getElementById('demo')?.scrollIntoView({ behavior: 'smooth' })}
-          >
-            Try It Out
-          </button>
+
         </div>
       </div>
     </nav>
