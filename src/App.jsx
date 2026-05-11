@@ -38,12 +38,13 @@ export default function App() {
 
     // Listen for future auth changes (login/logout/token refresh)
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      async (event, session) => {
-        if (!authChecked && event === 'INITIAL_SESSION') return // Already handled above
+      (event, session) => {
+        if (!authChecked && event === 'INITIAL_SESSION') return 
 
         if (event === 'SIGNED_IN' && session?.user) {
           setUser(session.user)
-          await checkHouseholdAndRoute(session.user)
+          // Instant navigation to dashboard; Dashboard will redirect to onboarding if needed
+          setCurrentView('dashboard')
         }
 
         if (event === 'SIGNED_OUT') {
@@ -91,16 +92,16 @@ export default function App() {
       {currentView === 'landing'    && <Landing    onNavigate={handleNavigate} />}
       {currentView === 'login'      && <Login      onNavigate={handleNavigate} />}
       {currentView === 'signup'     && <SignUp     onNavigate={handleNavigate} />}
-      {currentView === 'onboarding' && <Onboarding onNavigate={handleNavigate} />}
+      {currentView === 'onboarding' && <Onboarding onNavigate={handleNavigate} user={user} />}
 
       {/* Protected Routes */}
       {currentView === 'dashboard'  && <Dashboard     onNavigate={handleNavigate} onSignOut={handleSignOut} user={user} />}
-      {currentView === 'mediation'  && <MediationChat  onNavigate={handleNavigate} onSignOut={handleSignOut} />}
-      {currentView === 'chores'     && <ChoreCalendar  onNavigate={handleNavigate} onSignOut={handleSignOut} />}
-      {currentView === 'rules'      && <HouseRules     onNavigate={handleNavigate} onSignOut={handleSignOut} />}
+      {currentView === 'mediation'  && <MediationChat  onNavigate={handleNavigate} onSignOut={handleSignOut} user={user} />}
+      {currentView === 'chores'     && <ChoreCalendar  onNavigate={handleNavigate} onSignOut={handleSignOut} user={user} />}
+      {currentView === 'rules'      && <HouseRules     onNavigate={handleNavigate} onSignOut={handleSignOut} user={user} />}
 
-      {currentView === 'expenses'   && <Expenses       onNavigate={handleNavigate} onSignOut={handleSignOut} />}
-      {currentView === 'shopping'   && <ShoppingList   onNavigate={handleNavigate} onSignOut={handleSignOut} />}
+      {currentView === 'expenses'   && <Expenses       onNavigate={handleNavigate} onSignOut={handleSignOut} user={user} />}
+      {currentView === 'shopping'   && <ShoppingList   onNavigate={handleNavigate} onSignOut={handleSignOut} user={user} />}
 
       {/* Under Construction */}
       {(['notifications'].includes(currentView)) && (

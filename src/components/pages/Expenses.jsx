@@ -20,7 +20,7 @@ const CATEGORY_COLORS = {
   General: 'bg-gray-100 text-gray-700',
 }
 
-export default function Expenses({ onNavigate, onSignOut }) {
+export default function Expenses({ onNavigate, onSignOut, user }) {
   const [household, setHousehold] = useState(null)
   const [members, setMembers] = useState([])
   const [expenses, setExpenses] = useState([])
@@ -42,27 +42,28 @@ export default function Expenses({ onNavigate, onSignOut }) {
 
   const fetchData = async () => {
     try {
-      const { data: { user } } = await supabase.auth.getUser()
       if (!user) { onNavigate('login'); return }
 
       const { data: h } = await supabase
         .from('households').select('*').eq('admin_id', user.id).maybeSingle()
       if (!h) { onNavigate('onboarding'); return }
 
-      const { data: m } = await supabase
-        .from('members').select('*').eq('household_id', h.id)
+      // Parallelize fetching members and expenses
+      const [membersResponse, expensesResponse] = await Promise.all([
+        supabase.from('members').select('*').eq('household_id', h.id),
+        supabase.from('expenses').select('*').eq('household_id', h.id).order('created_at', { ascending: false })
+      ])
 
-      const { data: e } = await supabase
-        .from('expenses').select('*').eq('household_id', h.id)
-        .order('created_at', { ascending: false })
+      if (membersResponse.error) throw membersResponse.error
+      if (expensesResponse.error) throw expensesResponse.error
 
       setHousehold(h)
-      setMembers(m || [])
-      setExpenses(e || [])
+      setMembers(membersResponse.data || [])
+      setExpenses(expensesResponse.data || [])
 
       // Pre-fill split_between with all members
-      if (m && m.length > 0) {
-        setForm(f => ({ ...f, split_between: m.map(mb => mb.name) }))
+      if (membersResponse.data && membersResponse.data.length > 0) {
+        setForm(f => ({ ...f, split_between: membersResponse.data.map(mb => mb.name) }))
       }
     } catch (err) {
       console.error(err)

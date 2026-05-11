@@ -11,7 +11,7 @@ const CATEGORY_ICONS = {
   Other: '📦'
 }
 
-export default function ShoppingList({ onNavigate, onSignOut }) {
+export default function ShoppingList({ onNavigate, onSignOut, user }) {
   const [household, setHousehold] = useState(null)
   const [items, setItems] = useState([])
   const [loading, setLoading] = useState(true)
@@ -24,12 +24,13 @@ export default function ShoppingList({ onNavigate, onSignOut }) {
   const [submitting, setSubmitting] = useState(false)
 
   useEffect(() => {
-    fetchData()
-  }, [])
+    if (user) {
+      fetchData()
+    }
+  }, [user])
 
   const fetchData = async () => {
     try {
-      const { data: { user } } = await supabase.auth.getUser()
       if (!user) { onNavigate('login'); return }
 
       // Get user's member name (or use email prefix as fallback)

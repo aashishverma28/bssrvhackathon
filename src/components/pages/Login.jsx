@@ -20,9 +20,8 @@ export default function Login({ onNavigate }) {
 
       if (error) throw error
       
-      if (data.user) {
-        onNavigate('dashboard')
-      }
+      // No need to manually navigate, App.jsx listener handles it
+      // if (data.user) onNavigate('dashboard')
     } catch (err) {
       alert(err.message)
     } finally {

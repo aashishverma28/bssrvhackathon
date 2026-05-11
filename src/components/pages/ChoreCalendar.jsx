@@ -2,22 +2,23 @@ import React, { useState, useEffect } from 'react'
 import Layout from '../shared/Layout'
 import { supabase } from '../../lib/supabaseClient'
 
-export default function ChoreCalendar({ onNavigate }) {
+export default function ChoreCalendar({ onNavigate, user }) {
   const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
   const [schedules, setSchedules] = useState([])
   const [household, setHousehold] = useState(null)
 
   useEffect(() => {
     const fetchData = async () => {
-      const { data: { user } } = await supabase.auth.getUser()
+      if (!user) return
       const { data: h } = await supabase.from('households').select('*').eq('admin_id', user.id).single()
+      if (!h) return
       setHousehold(h)
       
       const { data: s } = await supabase.from('schedules').select('*').eq('household_id', h.id)
       setSchedules(s || [])
     }
     fetchData()
-  }, [])
+  }, [user])
 
   return (
     <Layout activeTab="chores" onNavigate={onNavigate} householdName={household?.name}>

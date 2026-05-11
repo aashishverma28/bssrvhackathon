@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Button from '../ui/Button'
 import { supabase } from '../../lib/supabaseClient'
 
-export default function Onboarding({ onNavigate }) {
+export default function Onboarding({ onNavigate, user }) {
   const [step, setStep] = useState(1)
   const [householdName, setHouseholdName] = useState('')
   const [roommates, setRoommates] = useState([])
@@ -20,7 +20,7 @@ export default function Onboarding({ onNavigate }) {
 
   const completeOnboarding = async () => {
     try {
-      const { data: { user } } = await supabase.auth.getUser()
+      if (!user) return
       
       // Update household name if needed, or just proceed
       // For now, we'll just navigate to dashboard

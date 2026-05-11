@@ -2,21 +2,22 @@ import React, { useState, useEffect } from 'react'
 import Layout from '../shared/Layout'
 import { supabase } from '../../lib/supabaseClient'
 
-export default function HouseRules({ onNavigate }) {
+export default function HouseRules({ onNavigate, user }) {
   const [rules, setRules] = useState([])
   const [household, setHousehold] = useState(null)
   const [newRule, setNewRule] = useState({ category: 'General', description: '' })
 
   useEffect(() => {
     const fetchData = async () => {
-      const { data: { user } } = await supabase.auth.getUser()
+      if (!user) return
       const { data: h } = await supabase.from('households').select('*').eq('admin_id', user.id).single()
+      if (!h) return
       setHousehold(h)
       const { data: r } = await supabase.from('rules').select('*').eq('household_id', h.id)
       setRules(r || [])
     }
     fetchData()
-  }, [])
+  }, [user])
 
   const addRule = async (e) => {
     e.preventDefault()

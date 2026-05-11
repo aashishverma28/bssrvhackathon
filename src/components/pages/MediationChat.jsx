@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Layout from '../shared/Layout'
 import { supabase } from '../../lib/supabaseClient'
 
-export default function MediationChat({ onNavigate }) {
+export default function MediationChat({ onNavigate, user }) {
   const [messages, setMessages] = useState([
     { role: 'ai', content: 'Hello! I am your neutral household mediator. How can I help resolve a dispute today?' }
   ])
@@ -12,12 +12,12 @@ export default function MediationChat({ onNavigate }) {
 
   useEffect(() => {
     const fetchHousehold = async () => {
-      const { data: { user } } = await supabase.auth.getUser()
+      if (!user) return
       const { data } = await supabase.from('households').select('*').eq('admin_id', user.id).single()
       setHousehold(data)
     }
     fetchHousehold()
-  }, [])
+  }, [user])
 
   const handleSend = async (e) => {
     e.preventDefault()

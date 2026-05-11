@@ -21,9 +21,7 @@ export default function Dashboard({ onNavigate, onSignOut, user }) {
 
   const fetchDashboardData = async () => {
     try {
-      setDebugMsg('Getting user...')
-      const { data: { user }, error: userError } = await supabase.auth.getUser()
-      if (userError || !user) {
+      if (!user) {
         setLoading(false)
         onNavigate('login')
         return
@@ -37,10 +35,7 @@ export default function Dashboard({ onNavigate, onSignOut, user }) {
         .limit(1)
         .maybeSingle()
 
-      if (hError) {
-        console.error("Household query error:", hError)
-        // Don't just fail, let's see what the error is
-      }
+      if (hError) console.error("Household query error:", hError)
 
       // No household found → send to onboarding
       if (!householdData) {
@@ -49,25 +44,25 @@ export default function Dashboard({ onNavigate, onSignOut, user }) {
         return
       }
 
-      setDebugMsg('Getting members...')
-      const { data: membersData, error: mError } = await supabase
-        .from('members')
-        .select('*')
-        .eq('household_id', householdData.id)
+      setDebugMsg('Fetching members and logs...')
+      // Parallelize fetching members and logs
+      const [membersResponse, logsResponse] = await Promise.all([
+        supabase
+          .from('members')
+          .select('*')
+          .eq('household_id', householdData.id),
+        supabase
+          .from('logs')
+          .select('*')
+          .eq('household_id', householdData.id)
+          .order('timestamp', { ascending: false })
+      ])
 
-      if (mError) throw mError
+      if (membersResponse.error) throw membersResponse.error
+      if (logsResponse.error) throw logsResponse.error
 
-      setDebugMsg('Getting logs...')
-      const { data: logsData, error: lError } = await supabase
-        .from('logs')
-        .select('*')
-        .eq('household_id', householdData.id)
-        .order('timestamp', { ascending: false })
-
-      if (lError) throw lError
-
-      setData({ household: householdData, members: membersData })
-      setLogs(logsData || [])
+      setData({ household: householdData, members: membersResponse.data })
+      setLogs(logsResponse.data || [])
       setLoading(false)
     } catch (err) {
       console.error(err)
