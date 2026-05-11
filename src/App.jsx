@@ -10,6 +10,7 @@ import ChoreCalendar from './components/pages/ChoreCalendar'
 import Expenses from './components/pages/Expenses'
 import ShoppingList from './components/pages/ShoppingList'
 import HouseRules from './components/pages/HouseRules'
+import Notifications from './components/pages/Notifications'
 
 export default function App() {
   // Start on landing immediately — no blocking spinner
@@ -102,9 +103,10 @@ export default function App() {
 
       {currentView === 'expenses'   && <Expenses       onNavigate={handleNavigate} onSignOut={handleSignOut} user={user} />}
       {currentView === 'shopping'   && <ShoppingList   onNavigate={handleNavigate} onSignOut={handleSignOut} user={user} />}
+      {currentView === 'notifications' && <Notifications onNavigate={handleNavigate} user={user} />}
 
       {/* Under Construction */}
-      {(['notifications'].includes(currentView)) && (
+      {(['settings'].includes(currentView)) && (
         <div className="min-h-screen flex items-center justify-center bg-off-white p-20 text-center">
           <div>
             <p className="text-5xl mb-4">🚧</p>
