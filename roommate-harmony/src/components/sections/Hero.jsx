@@ -23,8 +23,18 @@ export default function Hero() {
               arguments.
             </p>
             <div className="flex gap-4 flex-wrap">
-              <Button variant="primary">See How It Works</Button>
-              <Button variant="secondary">View Demo Data</Button>
+              <Button 
+                variant="primary"
+                onClick={() => document.getElementById('how-it-works')?.scrollIntoView({ behavior: 'smooth' })}
+              >
+                See How It Works
+              </Button>
+              <Button 
+                variant="secondary"
+                onClick={() => document.getElementById('demo')?.scrollIntoView({ behavior: 'smooth' })}
+              >
+                View Demo Data
+              </Button>
             </div>
           </div>
 
