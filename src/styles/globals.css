@@ -1,0 +1,77 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    background-color: #F5F0EB;
+    color: #1A1A1A;
+    font-family: 'Inter', sans-serif;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+  }
+
+  ::selection {
+    background-color: #C4704F;
+    color: #F5F0EB;
+  }
+}
+
+@layer components {
+  .section-padding {
+    @apply py-24 px-6 md:px-12 lg:px-20;
+  }
+
+  .container-max {
+    @apply max-w-6xl mx-auto;
+  }
+
+  .section-label {
+    @apply text-label uppercase tracking-widest text-muted font-medium;
+  }
+
+  .rough-underline {
+    @apply relative inline-block;
+  }
+
+  .rough-underline::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: #C4704F;
+    border-radius: 2px;
+    transform: rotate(-0.5deg);
+  }
+
+  .rotated-tag {
+    @apply inline-block -rotate-2 bg-accent text-warm-white 
+           text-small font-medium px-3 py-1 rounded-rough;
+  }
+
+  .alert-block {
+    @apply bg-alert-bg text-alert-text font-mono text-small 
+           rounded-soft p-6 shadow-alert;
+  }
+
+  .timeline-line {
+    @apply absolute left-6 top-0 h-full w-px bg-border-soft;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
