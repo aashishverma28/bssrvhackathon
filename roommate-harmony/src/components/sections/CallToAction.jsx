@@ -11,15 +11,7 @@ export default function CallToAction() {
         <p className="text-body-lg text-muted">
           Stop arguing over who bought the last paper towels. Start living with clarity.
         </p>
-        <div className="pt-4">
-          <Button 
-            variant="primary" 
-            className="text-lg px-8 py-4"
-            onClick={() => alert("Thanks for your interest! We'll notify you when early access begins.")}
-          >
-            Get Early Access
-          </Button>
-        </div>
+
       </div>
     </section>
   )
